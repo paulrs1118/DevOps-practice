@@ -1,4 +1,4 @@
-resource "aws_security_group" "terraformssh-http-sg" {
+resource "aws_security_group" "terraform-ssh-http-sg" {
   name        = "Allow-ssh-terraform"
   description = "Allow SSH and HTTPD inbound traffic"
   vpc_id      = aws_vpc.terraform-vpc.id
@@ -25,6 +25,6 @@ resource "aws_security_group" "terraformssh-http-sg" {
   }
 
   tags = {
-    Name = "allow-ssh-sg-terraform"
+    Name = "terraform SSH & HTTP sg"
   }
 }
