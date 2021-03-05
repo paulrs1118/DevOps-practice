@@ -6,7 +6,7 @@ resource "aws_instance" "terraform-ubuntu-instance" {
   vpc_security_group_ids      = [aws_security_group.terraform-ssh-http-sg.id]
   subnet_id                   = aws_subnet.terraform_subnet.id
   associate_public_ip_address = true
-  iam_instance_profile        = aws_iam_instance_profile.SSM_EC2_profile.name
+  iam_instance_profile        = aws_iam_instance_profile.S3_EC2_profile.name
 
   tags = {
     Name = "terraform-Ubuntu"
