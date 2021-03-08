@@ -1,0 +1,31 @@
+#-----This documento allow EC2 instances to connect using SSM agent-----
+#Create the profile, this will be attached to instance
+resource "aws_iam_instance_profile" "SSM_EC2_profile" {
+  name = "SSM_EC2_profile"
+  role = aws_iam_role.SSM_EC2_role.name
+}
+
+#Then create the role, this will be attached to the profile above
+resource "aws_iam_role" "SSM_EC2_role" {
+  name = "SSM_EC2_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+#Finally create the role policy, here you will attach the role above 
+resource "aws_iam_role_policy_attachment" "EC2-ssm-policy" {
+  role       = aws_iam_role.SSM_EC2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
