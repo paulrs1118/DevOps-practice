@@ -1,6 +1,6 @@
-resource "aws_security_group" "terraform-ssh-http-sg" {
-  name        = "Allow-ssh-terraform"
-  description = "Allow SSH and HTTPD inbound traffic"
+resource "aws_security_group" "tf-http-ssh-sg" {
+  name        = "Allow-HTTP_and_SSH-terraform"
+  description = "Allow HTTP and SSH inbound traffic"
   vpc_id      = aws_vpc.terraform-vpc.id
 
   ingress {
@@ -12,6 +12,7 @@ resource "aws_security_group" "terraform-ssh-http-sg" {
   }
 
   ingress {
+    description = "HTTP from VPC"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -25,6 +26,6 @@ resource "aws_security_group" "terraform-ssh-http-sg" {
   }
 
   tags = {
-    Name = "terraform SSH & HTTP sg"
+    Name = "tf HTTP and SSH sg"
   }
 }
