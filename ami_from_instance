@@ -1,0 +1,4 @@
+resource "aws_ami_from_instance" "ubuntu20" {
+  name               = "terraform_ami-${var.domain}"
+  source_instance_id = aws_instance.terraform-ubuntu.id
+}
